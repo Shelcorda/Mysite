@@ -4,3 +4,5 @@
 2. 第2章，用户管理
    - 使用自定义的方法设置登录，此外可以设置好看的登录模板
    - 使用Django自带的login函数，在auth视图中有定义好的login函数，其模板的名字为"registration/login.html"；或者也可以指定模板：url(r'^new-login/$', auth_views.login, {"template_name": "account/login.html"})
+   - 使用Django自带的user.is_authenticated判断用户是否处于登录状态
+   - 使用Django自带的logout函数，进行退出操作，同login函数
