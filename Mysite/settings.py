@@ -125,3 +125,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+#登录后跳转的页面
+LOGIN_REDIRECT_URL = '/blog/'
+
