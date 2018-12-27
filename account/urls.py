@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, name="user_login"),  #django内置的登录
    # url(r'^new-login/$', auth_views.login, {"template_name": "account/login.html"}), #可以直接指定模板的名字
     url(r'^logout/$', auth_views.logout, {"template_name": "account/logout.html"}, name="user_logout"),
+
+    url(r'^register/$', views.register, name="user_register"),
 ]
