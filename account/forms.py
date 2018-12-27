@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import UserProfile
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -19,3 +20,7 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError("密码不一致。")
         return cd['password2']
 
+class UserPerfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ("phone", "birth")

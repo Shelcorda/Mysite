@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
-from . forms import LoginForm, RegistrationForm
+from . forms import LoginForm, RegistrationForm, UserPerfileForm
 
 # Create your views here.
 
@@ -25,15 +25,22 @@ def user_login(request):
 def register(request):
     if request.method == "POST":
         user_form = RegistrationForm(request.POST)
-        if user_form.is_valid():
+        userprofile_form = UserPerfileForm(request.POST)
+
+        if user_form.is_valid()*userprofile_form.is_valid():
             new_user = user_form.save(commit=False) #还没有保存到数据库
             new_user.set_password(user_form.cleaned_data['password']) #设置密码
             new_user.save() #保存到数据库
+            new_profile = userprofile_form.save(commit=False)
+            new_profile.user = new_user
+            new_profile.save()
             return HttpResponse("successfully")
         else:
             return HttpResponse("Sorry, you can not register.")
     else:
         user_form = RegistrationForm()
-        return render(request, "account/register.html", {"form": user_form})
+        userprofile_form = UserPerfileForm()
+        return render(request, "account/register.html", {"form": user_form,
+                                                         "profile": userprofile_form})
 
 
