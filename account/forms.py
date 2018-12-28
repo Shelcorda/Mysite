@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, UserInfo
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -12,7 +12,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("username", "email")
+        fields = ("username", "email") #表示直接使用model中的字段，不需要再定义
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -20,7 +20,17 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError("密码不一致。")
         return cd['password2']
 
-class UserPerfileForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ("phone", "birth")
+
+class UserInfoForm(forms.ModelForm):
+    class Meta:
+        model = UserInfo
+        fields = ("school", "company", "profession", "address", "aboutme", "photo")
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("email",)
