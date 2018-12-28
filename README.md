@@ -7,3 +7,4 @@
    - 使用Django自带的user.is_authenticated判断用户是否处于登录状态
    - 使用Django自带的logout函数，进行退出操作，同login函数
    - 使用自定义的方法设置注册，可以直接使用User模型中自带的属性，不需要另外建Model；当需要User中不存在的属性时，也可以拓展User模型
+   - 使用Django自带的密码重置和修改函数，进行有关密码的修改和重置
