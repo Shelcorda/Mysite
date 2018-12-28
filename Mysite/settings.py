@@ -128,3 +128,13 @@ STATICFILES_DIRS = [
 #登录后跳转的页面
 LOGIN_REDIRECT_URL = '/blog/'
 
+#Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST_USER = 'ygjmanager@163.com'
+EMAIL_HOST_PASSWORD = 'qa1234'
+EMAIL_POST = 25
+EMAIL_USE_TLS = True
+EMAIL_FROM = 'Django_ygj'
+DEFAULT_FROM_EMAIL = 'ygjmanager@163.com'
+
