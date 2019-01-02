@@ -127,7 +127,7 @@ STATICFILES_DIRS = [
 ]
 
 #登录后跳转的页面
-LOGIN_REDIRECT_URL = '/blog/'
+LOGIN_REDIRECT_URL = '/home/'
 
 #Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
