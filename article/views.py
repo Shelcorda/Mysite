@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from .models import ArticleColumn, ArticlePost
 from .forms import ArticleColumnForm, ArticlePostForm
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 # Create your views here.
 
 @login_required(login_url='/account/login/')
@@ -78,8 +80,20 @@ def article_post(request):
 
 @login_required(login_url='/account/login')
 def article_list(request):
-    articles = ArticlePost.objects.filter(author=request.user)
-    return render(request,"article/column/article_list.html", {"articles": articles})
+    articles_list = ArticlePost.objects.filter(author=request.user)
+    paginator = Paginator(articles_list, 2) #每页最多2个
+    page = request.GET.get('page') #当前浏览器所请求的页码数值
+    try:
+        current_page = paginator.page(page) #获取指定页面内容，其参数必须是大于或等于1的整数
+        articles = current_page.object_list #获取当前页面所有的对象列表
+    except PageNotAnInteger:
+        current_page = paginator.page(1)
+        articles = current_page.object_list
+    except EmptyPage: #请求的页码数值为空或者URL参数中没有page
+        current_page = paginator.page(paginator.num_pages) #返回页数
+        articles = current_page.object_list
+
+    return render(request, "article/column/article_list.html", {"articles": articles, "page": current_page})
 
 @login_required(login_url='/account/login')
 def article_detail(request, id, slug):
