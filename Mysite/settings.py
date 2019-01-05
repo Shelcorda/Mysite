@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'blog',
     'account',
+    'article',
+    'course',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,4 +126,20 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+#登录后跳转的页面
+LOGIN_REDIRECT_URL = '/home/'
+
+#Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST_USER = 'ygjmanager@163.com'
+EMAIL_HOST_PASSWORD = 'qa1234'
+EMAIL_POST = 25
+EMAIL_USE_TLS = True
+EMAIL_FROM = 'Django_ygj'
+DEFAULT_FROM_EMAIL = 'ygjmanager@163.com'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
