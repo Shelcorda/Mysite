@@ -14,6 +14,13 @@ class ArticleColumn(models.Model):
     def __str__(self):
         return self.column
 
+#文章标签
+class ArticleTag(models.Model):
+    author = models.ForeignKey(User, related_name="tag", on_delete=True)
+    tag = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.tag
 
 #文章
 class ArticlePost(models.Model):
@@ -24,6 +31,10 @@ class ArticlePost(models.Model):
     body = models.TextField()
     created = models.DateTimeField(default=timezone.now())
     updated = models.DateTimeField(auto_now=True)
+    article_tag = models.ManyToManyField(ArticleTag, related_name="article_tag", blank=True)
+
+    #点赞
+    users_like = models.ManyToManyField(User, related_name="articles_like", blank=True)
 
     class Meta:
         ordering = ("-updated", )
@@ -41,3 +52,4 @@ class ArticlePost(models.Model):
 
     def get_url_path(self):
         return reverse("article:list_article_detail", args=[self.id, self.slug])
+
