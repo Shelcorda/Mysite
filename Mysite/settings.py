@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'blog',
     'account',
     'article',
+    'course',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -138,4 +139,7 @@ EMAIL_POST = 25
 EMAIL_USE_TLS = True
 EMAIL_FROM = 'Django_ygj'
 DEFAULT_FROM_EMAIL = 'ygjmanager@163.com'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
